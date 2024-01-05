@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        .fixed-block {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+            display: none;
+            /* Initially hide the fixed block */
+        }
+
+        #page1 .fixed-block {
+            display: block;
+            /* Show the fixed block only on the first page */
+        }
+
+        /* Other styles for your sections */
+        section {
+            height: 100vh;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="page1" class="section">
+        <h1>Page 1</h1>
+        <div class="fixed-block">
+            Fixed Block for Page 1
+        </div>
+    </div>
+
+    <div id="page2" class="section">
+        <h1>Page 2</h1>
+        <!-- No fixed block here -->
+    </div>
+
+    <div id="page3" class="section">
+        <h1>Page 3</h1>
+        <!-- No fixed block here -->
+    </div>
+
+    <script>
+        // JavaScript to show/hide fixed block based on scroll position or current page
+        document.addEventListener("DOMContentLoaded", function () {
+            const fixedBlock = document.querySelector('.fixed-block');
+
+            // You can adjust this logic based on your actual implementation
+            window.addEventListener('scroll', function () {
+                if (isScrolledIntoView(document.getElementById('page1'))) {
+                    fixedBlock.style.display = 'block';
+                } else {
+                    fixedBlock.style.display = 'none';
+                }
+            });
+
+            function isScrolledIntoView(elem) {
+                const rect = elem.getBoundingClientRect();
+                const elemTop = rect.top;
+                const elemBottom = rect.bottom;
+
+                // Only completely visible elements return true
+                return elemTop >= 0 && elemBottom <= window.innerHeight;
+            }
+        });
+    </script>
+</body>
+
+</html>
